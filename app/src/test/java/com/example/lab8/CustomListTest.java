@@ -37,9 +37,9 @@ public class CustomListTest {
     }
 
     /**
-     * add a new city to the list
-     * check if the list contains the new city
-     * and confirm that the list size grows by one
+     * Tests the hasCity method by adding a new city to the list
+     * and check if the list contains the new city.
+     * Lastly, confirm that the list size grows by one.
      */
     @Test
     public void testHasCity() {
@@ -51,6 +51,13 @@ public class CustomListTest {
         assertEquals(list.getCount(),listSize + 1);
     }
 
+    /**
+     * Tests the deleteCity method by adding a city,
+     * checking the count after adding, then deleting
+     * the city and checking the count again. Last check
+     * uses hasCity to ensure the city that was
+     * deleted from the list.
+     */
     @Test
     public void testDelete() {
         list = MockCityList();
@@ -63,6 +70,28 @@ public class CustomListTest {
         assertFalse(list.hasCity(cityToDelete));
     }
 
+    @Test
+    public void testCountCities() {
+        list = MockCityList();
+        assertEquals(0, list.getCount());
+
+        City newCity = new City("Calgary", "Alberta");
+        list.addCity(newCity);
+        assertEquals(1, list.getCount());
+
+        assertFalse(list.getCount() > 1);
+        assertTrue(list.getCount() <= 2);
+
+        City newCityTwo = new City("Banff", "Alberta");
+        list.addCity(newCityTwo);
+        assertEquals(2, list.getCount());
+
+        list.deleteCity(newCityTwo);
+        assertEquals(1, list.getCount());
+        list.deleteCity(newCity);
+        assertEquals(0, list.getCount());
+
+    }
 
 
 }
